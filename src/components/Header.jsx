@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__image">
-        <img src="../../src/assets/logo.png" alt="Logo"/> 
+        <img src="../../src/assets/images/logo.png" alt="Logo"/> 
       </div>
 
       <SearchBar onSearch={() => window.alert("OwO")} />

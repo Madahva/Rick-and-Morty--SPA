@@ -2,7 +2,7 @@ import "../styles/Card.css";
 
 export default function Card(props) {
   return (
-    <div tabIndex={1} className="card" onKeyPress={props.onClose} on>
+    <div tabIndex={1} className="card" onKeyPress={props.onClose}>
       <div className="card__header">
         <h2>{props.name}</h2>
       </div>

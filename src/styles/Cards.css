@@ -1,8 +1,9 @@
 .cards {
   align-items: center;
   display: flex;
-  justify-content: center;
-  padding: 10rem;
+  flex-wrap: wrap-reverse;
   gap: 3rem;
-  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 15rem 10rem 0rem 10rem;
 }

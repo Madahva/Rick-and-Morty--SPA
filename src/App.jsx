@@ -20,11 +20,15 @@ function App() {
       });
   }
 
+  function onClose(ID) {
+    setCharacters(characters.filter(character => character.id !== ID));
+  }
+
   return (
     <div className="App">
       <Nav onSearch={onSearch} />
       <Jerry />
-      <Cards characters={characters} />
+      <Cards characters={characters} onClose={onClose} />
       <Wave />
     </div>
   );

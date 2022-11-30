@@ -1,6 +1,87 @@
-.searchBar {
+.searchBar form {
   align-items: center;
   display: flex;
+  margin: 0 2rem;
   justify-content: center;
-  padding-right: 2rem;
+}
+
+form input {
+  background-color: #e7e7e6;
+  border: none;
+  caret-color: var(--purple);
+  color: var(--purple);
+  width: 80%;
+  outline: none;
+  order: 2;
+}
+
+form input:focus ~ .button-search{
+  transform: scale(1.1) ;
+  transition: all ease-in-out .2s;
+}
+
+form input:focus {
+  padding: .3rem;
+  transition: all ease-in-out .2s;
+}
+
+form {
+  align-items: center;
+  background-color: #e7e7e6;
+  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.25);
+  border-image: linear-gradient( 1turn, rgba(116, 9, 121, 1), rgba(185, 8, 246, 1), rgba(91, 28, 230, 1) ) 1 / 3px;
+  border-radius: .5rem;
+  border-style: solid;
+  box-shadow: 0px 0px 30px 0px RGBA(154, 53, 239, 0.5);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+button {
+  width: 2rem;
+  background: none;
+  border: none;
+}
+
+button img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.button-random {
+  transform: scale(1.5);
+  order: 3;
+}
+
+.button-random:hover img {
+  transform: rotate(360deg) scale(1.1);
+  transition: all ease-in-out 1.5s;
+}
+
+.button-random:focus img {
+  transform: rotate(360deg) scale(1.1);
+  transition: all ease-in-out 1.5s;
+}
+
+.button-random:before {
+  position: absolute;
+  content: "";
+  background: var(--purple);
+  height: 100%;
+  width: 2px;
+  left: -5px;
+  top: 0;
+}
+
+@media (min-width: 900px) {
+  .searchBar form {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 6rem;
+    width: 20rem;
+  }
 }

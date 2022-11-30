@@ -1,9 +1,12 @@
 * {
   font-family: "Roboto", sans-serif;
+  --blue: #030328;
+  --purple: #9A35EF;
+  --green: #43D018;
 }
 
 body {
-  background-color: #030328;
+  background-color: var(--blue);
 }
 
 .jerry-container {

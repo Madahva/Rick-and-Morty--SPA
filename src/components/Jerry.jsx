@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Jerry.css"
 import jerryImg from "../assets/images/jerry.gif"
 
 const Jerry = () => {

@@ -6,6 +6,10 @@ body {
   background-color: #030328;
 }
 
+.jerry-container {
+  position: fixed;
+}
+
 .jerry {
   position: absolute;
   width: 10rem;
@@ -19,7 +23,7 @@ body {
 @keyframes falling {
   50% {
     opacity: 0;
-    transform: translateY(80vh);
+    transform: translateY(100vh);
   }
 
   100% {

@@ -1,9 +1,9 @@
-import "./styles/App.css";
 import React, { useState } from "react";
+import "./styles/App.css";
 import Nav from "./components/Nav.jsx";
 import Cards from "./components/Cards.jsx";
+import Jerry from "./components/Jerry.jsx";
 import Wave from "./components/Wave.jsx";
-import jerry from "./assets/images/jerry.gif";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -23,9 +23,7 @@ function App() {
   return (
     <div className="App">
       <Nav onSearch={onSearch} />
-      <div className="jerry-container">
-        <img className="jerry" src={jerry} alt="Jerry" />
-      </div>
+      <Jerry />
       <Cards characters={characters} />
       <Wave />
     </div>

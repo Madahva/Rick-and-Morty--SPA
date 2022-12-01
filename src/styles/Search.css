@@ -57,8 +57,16 @@ button img {
 }
 
 .button-random:hover img {
-  transform: rotate(360deg) scale(1.1);
-  transition: all ease-in-out 1.5s;
+  animation-name: girar;
+  animation-duration: 3s;
+  animation-fill-mode: solid;
+  animation-iteration-count: infinite;
+}
+
+@keyframes girar {
+  100% {
+    transform: rotate(360deg) scale(1.1);
+  }
 }
 
 .button-random:focus img {

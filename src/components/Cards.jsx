@@ -1,13 +1,13 @@
-import "../assets/styles/Cards.css";
+import css from "../assets/styles/Cards.module.css";
 import jerryImg from "../assets/images/jerry.gif";
 import Card from "./Card.jsx";
 
 const Cards = (props) => {
   const { characters } = props;
   return (
-    <div className="cards">
-      <div className="jerry-container">
-        <img className="jerry" src={jerryImg} alt="Jerry" />
+    <div className={css.cards}>
+      <div className={css.jerryContainer}>
+        <img className={css.jerry} src={jerryImg} alt="Jerry" />
       </div>
 
       {characters.map((character) => (
@@ -22,11 +22,11 @@ const Cards = (props) => {
         />
       ))}
 
-      <div className="wave-container">
-        <div className="wave wave1"></div>
-        <div className="wave wave2"></div>
-        <div className="wave wave3"></div>
-        <div className="wave wave4"></div>
+      <div>
+        <div className={`${css.wave} ${css.wave1}`}></div>
+        <div className={`${css.wave} ${css.wave2}`}></div>
+        <div className={`${css.wave} ${css.wave3}`}></div>
+        <div className={`${css.wave} ${css.wave4}`}></div>
       </div>
     </div>
   );

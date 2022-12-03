@@ -1,10 +1,10 @@
-import "../assets/styles/Card.css";
+import css from "../assets/styles/Card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
   return (
-    <div tabIndex={1} className="card" onKeyPress={props.onClose}>
-      <div className="card__header">
+    <div tabIndex={1} className={css.card} onKeyPress={props.onClose}>
+      <div className={css["card__header"]}>
         <Link to={`/detail/${props.id}`}>
           <h3>{props.name}</h3>
         </Link>
@@ -16,7 +16,7 @@ const Card = (props) => {
 
       <img src={props.image} alt="Rick" />
 
-      <div className="card__info">
+      <div className={css["card__info"]}>
         <p>{props.species}</p>
         <p>{props.gender}</p>
       </div>

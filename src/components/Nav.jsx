@@ -1,4 +1,4 @@
-import "../assets/styles/Nav.css";
+import css from "../assets/styles/Nav.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import headerLogo from "../assets/images/logo.png";
 import SearchBar from "./SearchBar";
@@ -11,8 +11,8 @@ const Nav = (props) => {
   };
 
   return (
-    <div className="header">
-      <div className="header__image">
+    <div className={css.header}>
+      <div className={css.header__image}>
         <img src={headerLogo} alt="Logo" onClick={goToHome} />
       </div>
 

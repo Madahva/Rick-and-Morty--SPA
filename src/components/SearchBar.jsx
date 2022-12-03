@@ -1,4 +1,4 @@
-import "../assets/styles/Search.css";
+import css from "../assets/styles/SearchBar.module.css";
 import React, { useState } from "react";
 import search__icon from "../assets/images/search__icon.svg";
 import random__icon from "../assets/images/random__icon.svg";
@@ -27,7 +27,7 @@ const SearchBar = (props) => {
   };
 
   return (
-    <div className="searchBar">
+    <div className={css.searchBar}>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           autoFocus
@@ -36,11 +36,11 @@ const SearchBar = (props) => {
           onChange={handleChange}
         />
 
-        <button className="button-search" onClick={handleClick}>
+        <button className={css["button-search"]} onClick={handleClick}>
           <img src={search__icon} alt="search" />
         </button>
 
-        <button className="button-random" onClick={handleRandom}>
+        <button className={css["button-random"]} onClick={handleRandom}>
           <img src={random__icon} alt="random" />
         </button>
       </form>

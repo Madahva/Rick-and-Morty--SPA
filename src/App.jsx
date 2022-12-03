@@ -1,46 +1,52 @@
+import "./assets/styles/App.css";
 import React, { useState } from "react";
-import "./styles/App.css";
+import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav.jsx";
 import Cards from "./components/Cards.jsx";
-import Jerry from "./components/Jerry.jsx";
-import Wave from "./components/Wave.jsx";
+import About from "./components/About.jsx";
+import Detail from "./components/Detail";
 
-function App() {
+const App = () => {
   const [characters, setCharacters] = useState([]);
 
-  function onSearch(character) {
+  const onSearch = (character) => {
     fetch(`https://rickandmortyapi.com/api/character/${character}`)
       .then((response) => response.json())
       .then((data) => {
-        if (!isRepetida(data.id)) {
+        if (data.name && !isRepetida(data.id)) {
           setCharacters((oldChars) => [...oldChars, data]);
         } else {
           window.alert("No hay personajes con ese ID");
         }
       });
-  }
+  };
 
-  function isRepetida(ID) {
+  const isRepetida = (ID) => {
     let aux = false;
     characters.forEach((element) => {
-      if (element.id == ID) aux = true;
+      if (element.id === ID) aux = true;
     });
 
     return aux;
-  }
+  };
 
-  function onClose(ID) {
+  const onClose = (ID) => {
     setCharacters(characters.filter((character) => character.id !== ID));
-  }
+  };
 
   return (
     <div className="App">
       <Nav onSearch={onSearch} />
-      <Jerry />
-      <Cards characters={characters} onClose={onClose} />
-      <Wave />
+      <Routes>
+        <Route
+          path="/home"
+          element={<Cards characters={characters} onClose={onClose} />}
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="/detail/:detailId" element={<Detail />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

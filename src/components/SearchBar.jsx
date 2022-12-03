@@ -1,9 +1,9 @@
+import "../assets/styles/Search.css";
 import React, { useState } from "react";
-import "../styles/Search.css";
 import search__icon from "../assets/images/search__icon.svg";
 import random__icon from "../assets/images/random__icon.svg";
 
-export default function SearchBar(props) {
+const SearchBar = (props) => {
   const inputVal = document.getElementsByTagName("input");
 
   const [character, setCharacter] = useState("");
@@ -29,7 +29,12 @@ export default function SearchBar(props) {
   return (
     <div className="searchBar">
       <form onSubmit={(e) => e.preventDefault()}>
-        <input autoFocus placeholder="Search..." type="search" onChange={handleChange} />
+        <input
+          autoFocus
+          placeholder="Search..."
+          type="search"
+          onChange={handleChange}
+        />
 
         <button className="button-search" onClick={handleClick}>
           <img src={search__icon} alt="search" />
@@ -41,4 +46,6 @@ export default function SearchBar(props) {
       </form>
     </div>
   );
-}
+};
+
+export default SearchBar;

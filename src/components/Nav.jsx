@@ -1,13 +1,22 @@
-import React from "react";
-import "../styles/Nav.css";
-import SearchBar from "./SearchBar"
+import "../assets/styles/Nav.css";
+import { Link, useNavigate } from "react-router-dom";
+import headerLogo from "../assets/images/logo.png";
+import SearchBar from "./SearchBar";
 
 const Nav = (props) => {
+  const navigate = useNavigate();
+
+  const goToHome = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="header">
       <div className="header__image">
-        <img src="../../src/assets/images/logo.png" alt="Logo"/> 
+        <img src={headerLogo} alt="Logo" onClick={goToHome} />
       </div>
+
+      <Link to="/about">About</Link>
 
       <SearchBar onSearch={props.onSearch} />
     </div>

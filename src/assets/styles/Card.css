@@ -45,7 +45,11 @@
   right: 4rem;
   top: 6rem;
   width: 50px;
+}
 
+.card button:hover {
+  transition: all ease-in .3s;
+  transform: scale(1.1);
 }
 
 .card:hover img {
@@ -80,6 +84,19 @@
   font-size: 1.2rem;
   margin: 0 auto;
   padding: 1rem;
+}
+
+.card a {
+  text-decoration: none;
+  margin: 0 auto;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.card a:hover {
+  transition: all ease-in .3s;
+  transform: scale(1.1);
+  text-decoration: underline var(--green);
 }
 
 .card__info {

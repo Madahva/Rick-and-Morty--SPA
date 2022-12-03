@@ -11,7 +11,10 @@ const Card = (props) => {
       </div>
 
       <button tabIndex={0} onClick={props.onClose}>
-        X
+        <div class={css["close-container"]}>
+          <div class={css.leftright}></div>
+          <div class={css.rightleft}></div>
+        </div>
       </button>
 
       <img src={props.image} alt="Rick" />

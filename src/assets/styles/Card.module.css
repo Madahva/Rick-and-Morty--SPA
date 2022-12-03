@@ -1,31 +1,67 @@
 .card {
-  -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.75);
-  background: rgb(0,0,0);
-  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(3,3,40,1) 100%);
-  border-image: linear-gradient( 1turn, rgba(116, 9, 121, 1), rgba(185, 8, 246, 1), rgba(91, 28, 230, 1) ) 1 / 3px;
-  border-radius: .5rem;
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(3, 3, 40, 1) 100%
+  );
+  border-image: linear-gradient(
+      1turn,
+      rgba(116, 9, 121, 1),
+      rgba(185, 8, 246, 1),
+      rgba(91, 28, 230, 1)
+    )
+    1 / 3px;
+  border-radius: 0.5rem;
   border-style: solid;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
   display: inline-block;
   height: min-content;
-  overflow: hidden;
-  width: 170px;
-  min-width: 170px;
+  width: 160px;
+  min-width: 160px;
   position: relative;
   z-index: 99999;
 }
 
 .card:hover {
-  box-shadow: 0px 0px 80px 0px rgba(0,0,0,0.75);
-  transform: translateY(-10px);
-  transition: all ease-out .3s;
+  box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 1);
+  transform: translateY(-30px) skew(-1deg,2deg);
+  transition: all ease-out 0.3s;
+}
+
+.card:hover img {
+  opacity: 0.4;
+  transition: all ease-in-out 0.3s;
+}
+
+.card:hover a::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.card:hover button {
+  opacity: 1;
+  transition: all ease-in-out 0.5s;
+  z-index: 999;
+}
+
+.card:focus img {
+  opacity: 0.4;
+  transition: all ease-in-out 0.3s;
+}
+
+.card:focus button {
+  opacity: 1;
+  transition: all ease-in-out 0.5s;
+  z-index: 999;
 }
 
 .card:focus {
-  box-shadow: 0px 0px 80px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 80px 0px rgba(0, 0, 0, 0.75);
   transform: translateY(-10px);
-  transition: all ease-out .3s;
+  transition: all ease-out 0.3s;
 }
 
 .card__header {
@@ -35,7 +71,7 @@
 }
 
 .card button {
-  background-color: white;
+  background-color: transparent;
   border-radius: 100%;
   border: none;
   color: #bf616a;
@@ -48,30 +84,36 @@
 }
 
 .card button:hover {
-  transition: all ease-in .3s;
+  transition: all ease-in 0.5s;
   transform: scale(1.1);
 }
 
-.card:hover img {
-  opacity: 0.4;
-  transition: all ease-in-out .3s;
+a {
+  animation: moveTittle;
+  animation-duration: 5s;
+  animation-fill-mode: solid;
+  animation-iteration-count: infinite;
+  position: relative;
 }
 
-.card:hover button {
-  opacity: 1;
-  transition: all ease-in-out .5s;
-  z-index: 999;
+@keyframes moveTittle {
+  50% {
+    transform: scale(0.9);
+  }
 }
 
-.card:focus img {
-  opacity: 0.4;
-  transition: all ease-in-out .3s;
-}
-
-.card:focus button {
-  opacity: 1;
-  transition: all ease-in-out .5s;
-  z-index: 999;
+a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 4px;
+  background-color: var(--green);
+  bottom: .7rem;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
 }
 
 .card img {
@@ -88,15 +130,11 @@
 
 .card a {
   text-decoration: none;
+  text-align: center;
+  color: var(--purple);
   margin: 0 auto;
   cursor: pointer;
   cursor: hand;
-}
-
-.card a:hover {
-  transition: all ease-in .3s;
-  transform: scale(1.1);
-  text-decoration: underline var(--green);
 }
 
 .card__info {
@@ -111,4 +149,56 @@
   color: var(--green);
   font-size: 1rem;
   margin: 0;
+  max-width: 70px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
+
+.close-container{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.leftright{
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  background-color: var(--purple);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+  top: 1.5rem;
+  left: .8rem;
+  cursor: pointer;
+}
+
+.rightleft{
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  background-color: var(--purple);
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+  top: 1.5rem;
+  left: .8rem;
+  cursor: pointer;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: var(--purple);
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: var(--purple);
+}
+

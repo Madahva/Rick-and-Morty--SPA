@@ -1,14 +1,11 @@
 import React from "react";
+import css from "../assets/styles/About.module.css"
 
 const About = () => {
   return (
-    <div className="about">
-      <h2>Hola!</h2>
-      <h2>Hola!</h2>
-      <h2>Hola!</h2>
-      <h2>Hola!</h2>
-      <h2>Hola!</h2>
-      <h2>Hola!</h2>
+    <div className={css.about}>
+      <h1>Coming soon...</h1>
+ 
     </div>
   );
 };

@@ -1,0 +1,8 @@
+.about {
+  padding: 10rem;
+  color: var(--green);
+}
+
+.link {
+  display: none !important;
+}

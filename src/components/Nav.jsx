@@ -16,7 +16,7 @@ const Nav = (props) => {
         <img src={headerLogo} alt="Logo" onClick={goToHome} />
       </div>
 
-      <Link to="/about">About</Link>
+      <Link className={css.link} to="/about">About</Link>
 
       <SearchBar onSearch={props.onSearch} />
     </div>

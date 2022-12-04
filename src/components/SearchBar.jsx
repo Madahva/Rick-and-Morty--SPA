@@ -23,7 +23,6 @@ const SearchBar = (props) => {
     const random = Math.floor(Math.random() * 826);
     props.onSearch(random);
     inputVal[0].value = "";
-    setCharacter("");
   };
 
   return (

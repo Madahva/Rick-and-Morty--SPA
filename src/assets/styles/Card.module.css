@@ -88,14 +88,6 @@
   transform: scale(1.1);
 }
 
-a {
-  animation: moveTittle;
-  animation-duration: 5s;
-  animation-fill-mode: solid;
-  animation-iteration-count: infinite;
-  position: relative;
-}
-
 @keyframes moveTittle {
   50% {
     transform: scale(0.9);
@@ -130,11 +122,17 @@ a::before {
 
 .card a {
   text-decoration: none;
+  animation: moveTittle;
+  animation-duration: 5s;
+  animation-fill-mode: solid;
+  animation-iteration-count: infinite;
+  position: relative;
   text-align: center;
   color: var(--purple);
   margin: 0 auto;
   cursor: pointer;
   cursor: hand;
+  letter-spacing: .08rem;
 }
 
 .card__info {

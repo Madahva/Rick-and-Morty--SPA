@@ -13,8 +13,12 @@ const App = () => {
     fetch(`https://rickandmortyapi.com/api/character/${character}`)
       .then((response) => response.json())
       .then((data) => {
-        if (data.name && !isRepetida(data.id)) {
-          setCharacters((oldChars) => [...oldChars, data]);
+        if (data.name) {
+          if (!isRepetida(data.id)) {
+            setCharacters((oldChars) => [...oldChars, data]);
+          } else {
+            window.alert("No podes repetir personajes");
+          }
         } else {
           window.alert("No hay personajes con ese ID");
         }

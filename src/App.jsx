@@ -17,7 +17,7 @@ const App = () => {
     !access && navigate("/")
   },[access])
   const username = "correo@gmail.com"
-  const password = "password1"
+  const password = "password"
 
   const login = (userData) => {
     if (userData.username === username && userData.password === password) {

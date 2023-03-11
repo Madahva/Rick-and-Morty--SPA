@@ -1,0 +1,89 @@
+.header {
+  align-items: center;
+  display: flex;
+  padding: 2rem 0rem;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(3, 3, 40, 1) 100%
+  );
+  position: fixed;
+  width: 100%;
+  gap: 4rem;
+  z-index: 9999999;
+  margin: 0 auto;
+}
+
+.header__image {
+  animation: moveTittle;
+  animation-duration: 5s;
+  animation-fill-mode: solid;
+  animation-iteration-count: infinite;
+  height: 3rem;
+}
+
+@keyframes moveTittle {
+  50% {
+    transform: translateY(0.5rem);
+  }
+}
+
+.header__image img {
+  height: 100%;
+}
+
+.link {
+  animation: moveTittle;
+  animation-duration: 5s;
+  animation-fill-mode: solid;
+  animation-iteration-count: infinite;
+  color: var(--green);
+  padding: 0.5rem;
+  text-decoration: none;
+  position: relative;
+  font-size: 18px;
+  font-family: "Ricky";
+  letter-spacing: 0.5rem;
+}
+
+@keyframes moveTittle {
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.link:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 4px;
+  background-color: var(--green);
+  bottom: -0.3rem;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (min-width: 900px) {
+  .header {
+    height: 3rem;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .header__image {
+    width: 100%;
+    height: 100%;
+    padding-left: 10rem;
+  }
+}

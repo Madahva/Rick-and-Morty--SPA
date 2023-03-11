@@ -23,7 +23,7 @@ interface Character {
   image: string;
 }
 
-export const getCharacters = (req: Request, res: ExpressResponse) => {
+export const getAllCharactersHandler = (req: Request, res: ExpressResponse) => {
   fetch("https://rickandmortyapi.com/api/character/")
     .then((response: FetchResponse) => response.json() as Promise<ApiResponse>)
     .then((data: ApiResponse) => {
@@ -58,18 +58,34 @@ export const getCharacters = (req: Request, res: ExpressResponse) => {
     });
 };
 
-export async function searchCharacters(req: Request, res: ExpressResponse) {
-  // Lógica de búsqueda
-}
+export async function getCharactersByIdHandler(
+  req: Request,
+  res: ExpressResponse
+) {}
 
-export async function filterCharacters(req: Request, res: ExpressResponse) {
-  // Lógica de filtrado
-}
+export async function getCharactersByNameHandler(
+  req: Request,
+  res: ExpressResponse
+) {}
 
-export async function paginateCharacters(req: Request, res: ExpressResponse) {
-  // Lógica de paginación
-}
+export async function getFiltersHandler(req: Request, res: ExpressResponse) {}
 
-export async function getCharacterDetails(req: Request, res: ExpressResponse) {
-  // Lógica de detalles de personaje
-}
+export async function getCharactersByStatusHandler(
+  req: Request,
+  res: ExpressResponse
+) {}
+
+export async function getCharactersByGenderHandler(
+  req: Request,
+  res: ExpressResponse
+) {}
+
+export async function getCharactersBySpeciesHandler(
+  req: Request,
+  res: ExpressResponse
+) {}
+
+export async function getCharactersByTypeHandler(
+  req: Request,
+  res: ExpressResponse
+) {}

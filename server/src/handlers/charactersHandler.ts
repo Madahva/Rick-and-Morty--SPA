@@ -66,7 +66,12 @@ export const getAllCharactersHandler = (req: Request, res: ExpressResponse) => {
 export async function getCharactersByNameHandler(
   req: Request,
   res: ExpressResponse
-) {}
+) {
+  const name: string = req.params.name;
+  fetch(`${apiURL}/?name=${name}`)
+    .then((response: FetchResponse) => response.json() as Promise<Character>)
+    .then((data: Character) => res.send(data));
+}
 
 export async function getFiltersHandler(req: Request, res: ExpressResponse) {}
 

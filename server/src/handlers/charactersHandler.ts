@@ -107,7 +107,16 @@ export function getCharactersByGenderHandler(
 export function getCharactersBySpeciesHandler(
   req: Request,
   res: ExpressResponse
-) {}
+) {
+  const species: string = req.params.species;
+  fetch(`${apiURL}/?species=${species}`)
+    .then((response: FetchResponse) => response.json() as Promise<Character>)
+    .then((data: Character) => res.send(data))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("An error occurred 😕");
+    });
+}
 
 export function getCharactersByTypeHandler(
   req: Request,

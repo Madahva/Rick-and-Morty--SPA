@@ -1,5 +1,7 @@
-import { Request, Response as ExpressResponse } from "express";
+import { Request, Response as ExpressResponse, response } from "express";
 import fetch, { Response as FetchResponse } from "node-fetch";
+
+const apiURL: string = "https://rickandmortyapi.com/api/character/";
 
 interface ApiResponse {
   info: {
@@ -21,10 +23,11 @@ interface Character {
   origin: { name: string };
   location: { name: string };
   image: string;
+  episode: string[];
 }
 
 export const getAllCharactersHandler = (req: Request, res: ExpressResponse) => {
-  fetch("https://rickandmortyapi.com/api/character/")
+  fetch(apiURL)
     .then((response: FetchResponse) => response.json() as Promise<ApiResponse>)
     .then((data: ApiResponse) => {
       const filteredData = data.results.map(
@@ -38,6 +41,7 @@ export const getAllCharactersHandler = (req: Request, res: ExpressResponse) => {
           origin: { name: originName },
           location: { name: locationName },
           image,
+          episode,
         }) => ({
           id,
           name,
@@ -48,20 +52,16 @@ export const getAllCharactersHandler = (req: Request, res: ExpressResponse) => {
           origin: originName,
           location: locationName,
           image,
+          episode,
         })
       );
-      res.send(filteredData);
+      res.send({ ...data, results: filteredData });
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).send("An error occurred");
+      res.status(500).send("An error occurred 😕");
     });
 };
-
-export async function getCharactersByIdHandler(
-  req: Request,
-  res: ExpressResponse
-) {}
 
 export async function getCharactersByNameHandler(
   req: Request,

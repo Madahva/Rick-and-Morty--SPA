@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   getAllCharactersHandler,
-  getCharactersByIdHandler,
   getCharactersByNameHandler,
   getFiltersHandler,
   getCharactersByStatusHandler,
@@ -12,7 +11,6 @@ import {
 const router = Router();
 
 router.get("/", getAllCharactersHandler);
-router.get("/:id", getCharactersByIdHandler);
 router.get("/name/:name", getCharactersByNameHandler);
 router.get("/filters", getFiltersHandler);
 router.get("/status/:status", getCharactersByStatusHandler);

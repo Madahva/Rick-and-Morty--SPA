@@ -18,7 +18,7 @@ async function fetchAllCharacters(): Promise<any[]> {
   return characters;
 }
 
-export async function fetchAllFiltersNameHandler(
+export async function fetchAllApiFiltersNameHandler(
   req: Request,
   res: Response
 ): Promise<void> {

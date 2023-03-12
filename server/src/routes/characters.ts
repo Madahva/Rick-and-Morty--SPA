@@ -2,23 +2,16 @@ import { Router } from "express";
 import {
   getAllCharactersHandler,
   getCharactersByNameHandler,
-  getFiltersHandler,
-  getCharactersByStatusHandler,
-  getCharactersByGenderHandler,
-  getCharactersBySpeciesHandler,
-  getCharactersByTypeHandler,
+  getAllFiltersNameHandler,
+  getFilteredCharactersHandler,
 } from "../handlers/charactersHandler";
-import { fetchAllFiltersNameHandler } from "../handlers/filterHandler"
+import { fetchAllApiFiltersNameHandler } from "../handlers/filterHandler";
 const router = Router();
 
 router.get("/", getAllCharactersHandler);
 router.get("/name/:name", getCharactersByNameHandler);
-router.get("/filters", getFiltersHandler);
-router.get("/status/:status", getCharactersByStatusHandler);
-router.get("/gender/:gender", getCharactersByGenderHandler);
-router.get("/species/:species", getCharactersBySpeciesHandler);
-router.get("/type/:type", getCharactersByTypeHandler);
-
-router.get("/filtersName", fetchAllFiltersNameHandler)
+router.get("/filtersName", getAllFiltersNameHandler);
+router.get("/filter", getFilteredCharactersHandler)
+router.get("/apiFiltersName", fetchAllApiFiltersNameHandler);
 
 export default router;

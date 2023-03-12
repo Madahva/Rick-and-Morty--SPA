@@ -81,12 +81,16 @@ export function getCharactersByNameHandler(req: Request, res: ExpressResponse) {
     });
 }
 
-export function getCharactersByStatusHandler(
+export function getFilteredCharactersHandler(
   req: Request,
   res: ExpressResponse
 ) {
-  const status: string = req.params.status;
-  fetch(`${apiURL}/?status=${status}`)
+  const filter: any = req.query;
+  const apiUrl = `${apiURL}?${Object.entries(filter)
+    .map(([key, value]) => `${key}=${value}`)
+    .join("&")}`;
+
+  fetch(apiUrl)
     .then((response: FetchResponse) => response.json() as Promise<Character>)
     .then((data: Character) => res.send(data))
     .catch((error) => {
@@ -95,46 +99,7 @@ export function getCharactersByStatusHandler(
     });
 }
 
-export function getCharactersByGenderHandler(
-  req: Request,
-  res: ExpressResponse
-) {
-  const gender: string = req.params.gender;
-  fetch(`${apiURL}/?gender=${gender}`)
-    .then((response: FetchResponse) => response.json() as Promise<Character>)
-    .then((data: Character) => res.send(data))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("An error occurred 😕");
-    });
-}
-
-export function getCharactersBySpeciesHandler(
-  req: Request,
-  res: ExpressResponse
-) {
-  const species: string = req.params.species;
-  fetch(`${apiURL}/?species=${species}`)
-    .then((response: FetchResponse) => response.json() as Promise<Character>)
-    .then((data: Character) => res.send(data))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("An error occurred 😕");
-    });
-}
-
-export function getCharactersByTypeHandler(req: Request, res: ExpressResponse) {
-  const type: string = req.params.type;
-  fetch(`${apiURL}/?type=${type}`)
-    .then((response: FetchResponse) => response.json() as Promise<Character>)
-    .then((data: Character) => res.send(data))
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("An error occurred 😕");
-    });
-}
-
-export function getFiltersHandler(req: Request, res: ExpressResponse) {
+export function getAllFiltersNameHandler(req: Request, res: ExpressResponse) {
   const filtersName: FilterNames = {
     gender: ["Male", "Female", "unknown", "Genderless"],
     status: ["Alive", "unknown", "Dead"],

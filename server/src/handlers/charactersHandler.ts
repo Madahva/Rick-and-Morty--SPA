@@ -63,34 +63,44 @@ export const getAllCharactersHandler = (req: Request, res: ExpressResponse) => {
     });
 };
 
-export async function getCharactersByNameHandler(
-  req: Request,
-  res: ExpressResponse
-) {
+export function getCharactersByNameHandler(req: Request, res: ExpressResponse) {
   const name: string = req.params.name;
   fetch(`${apiURL}/?name=${name}`)
     .then((response: FetchResponse) => response.json() as Promise<Character>)
-    .then((data: Character) => res.send(data));
+    .then((data: Character) => res.send(data))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("An error occurred 😕");
+    });
 }
 
-export async function getFiltersHandler(req: Request, res: ExpressResponse) {}
+export function getFiltersHandler(req: Request, res: ExpressResponse) {}
 
-export async function getCharactersByStatusHandler(
+export function getCharactersByStatusHandler(
+  req: Request,
+  res: ExpressResponse
+) {
+  const status: string = req.params.status;
+  fetch(`${apiURL}/?status=${status}`)
+    .then((response: FetchResponse) => response.json() as Promise<Character>)
+    .then((data: Character) => res.send(data))
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("An error occurred 😕");
+    });
+}
+
+export function getCharactersByGenderHandler(
   req: Request,
   res: ExpressResponse
 ) {}
 
-export async function getCharactersByGenderHandler(
+export function getCharactersBySpeciesHandler(
   req: Request,
   res: ExpressResponse
 ) {}
 
-export async function getCharactersBySpeciesHandler(
-  req: Request,
-  res: ExpressResponse
-) {}
-
-export async function getCharactersByTypeHandler(
+export function getCharactersByTypeHandler(
   req: Request,
   res: ExpressResponse
 ) {}

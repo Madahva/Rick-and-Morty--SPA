@@ -1,28 +1,32 @@
 import type { ReactElement } from "react";
-import css from "../styles/CardsContainer.module.css";
-import jerryImg from "../images/jerry.gif";
+import css from "../assets/styles/CardsContainer.module.css";
+import jerryImg from "../assets/images/jerry.gif";
 import { Card } from "./Card";
-
+import { useAppSelector } from "../redux/hooks";
+import { selectCharacters } from "../redux/features/homeSlice";
+import { Character } from "../type";
 export function CardsContainer(): ReactElement {
+
+
+  const characters: Character[] = useAppSelector(selectCharacters);
+  console.log(characters);
+
   return (
     <div className={css.cards}>
       <div className={css.jerryContainer}>
         <img className={css.jerry} src={jerryImg} alt="Jerry" />
       </div>
 
-      {/*
-  {characters.map((character) => (
+  {characters.map((character, index) => (
     <Card
       gender={character.gender}
       id={character.id}
       image={character.image}
-      key={character.id}
+      key={index}
       name={character.name}
-      onClose={() => props.onClose(character.id)}
       species={character.species}
     />
   ))}
-*/}
 
       <div>
         <div className={`${css.wave} ${css.wave1}`}></div>

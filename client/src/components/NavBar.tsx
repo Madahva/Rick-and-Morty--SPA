@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
-import css from "../styles/NavBar.module.css";
+import css from "../assets/styles/NavBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import headerLogo from "../images/logo.png";
+import headerLogo from "../assets/images/logo.png";
 import { SearchBar } from "./SearchBar";
 
 export function NavBar(): ReactElement {

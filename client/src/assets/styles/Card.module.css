@@ -1,0 +1,200 @@
+.card {
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+  background: rgb(0, 0, 0);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(3, 3, 40, 1) 100%
+  );
+  border-image: linear-gradient(
+      1turn,
+      rgba(116, 9, 121, 1),
+      rgba(185, 8, 246, 1),
+      rgba(91, 28, 230, 1)
+    )
+    1 / 3px;
+  border-radius: 0.5rem;
+  border-style: solid;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+  display: inline-block;
+  height: min-content;
+  width: 160px;
+  min-width: 160px;
+  position: relative;
+  z-index: 99999;
+}
+
+.card:hover {
+  box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 1);
+  transform: translateY(-30px) skew(-1deg, 2deg);
+  transition: all ease-out 0.3s;
+}
+
+.card:hover img {
+  opacity: 0.4;
+  transition: all ease-in-out 0.3s;
+}
+
+.card:hover a::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.card:hover button {
+  opacity: 1;
+  transition: all ease-in-out 0.5s;
+  z-index: 999;
+}
+
+.card:focus img {
+  opacity: 0.4;
+  transition: all ease-in-out 0.3s;
+}
+
+.card:focus button {
+  opacity: 1;
+  transition: all ease-in-out 0.5s;
+  z-index: 999;
+}
+
+.card:focus {
+  box-shadow: 0px 0px 80px 0px rgba(0, 0, 0, 0.75);
+  transform: translateY(-10px);
+  transition: all ease-out 0.3s;
+}
+
+.card__header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card button {
+  background-color: transparent;
+  border-radius: 100%;
+  border: none;
+  color: #bf616a;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+  right: 4rem;
+  top: 6rem;
+  width: 50px;
+}
+
+.card button:hover {
+  transition: all ease-in 0.5s;
+  transform: scale(1.1);
+}
+
+@keyframes moveTittle {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 4px;
+  background-color: var(--green);
+  bottom: 0.7rem;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card img {
+  overflow: hidden;
+  width: 100%;
+}
+
+.card h2 {
+  color: var(--purple);
+  font-size: 1.2rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.card a {
+  text-decoration: none;
+  animation: moveTittle;
+  animation-duration: 5s;
+  animation-fill-mode: solid;
+  animation-iteration-count: infinite;
+  position: relative;
+  text-align: center;
+  color: var(--purple);
+  margin: 0 auto;
+  cursor: pointer;
+  cursor: hand;
+  letter-spacing: 0.08rem;
+}
+
+.card__info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 1rem;
+}
+
+.card p {
+  color: var(--green);
+  font-size: 1rem;
+  margin: 0;
+  max-width: 70px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.close-container {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.leftright {
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  background-color: var(--purple);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all 0.3s ease-in;
+  top: 1.5rem;
+  left: 0.8rem;
+  cursor: pointer;
+}
+
+.rightleft {
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  background-color: var(--purple);
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all 0.3s ease-in;
+  top: 1.5rem;
+  left: 0.8rem;
+  cursor: pointer;
+}
+
+.close-container:hover .leftright {
+  transform: rotate(-45deg);
+  background-color: var(--purple);
+}
+.close-container:hover .rightleft {
+  transform: rotate(45deg);
+  background-color: var(--purple);
+}

@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
-import css from "../styles/SearchBar.module.css";
-import search__icon from "../images/search__icon.svg";
+import css from "../assets/styles/SearchBar.module.css";
+import search__icon from "../assets/images/search__icon.svg";
 
 interface Props {
   onSearch: (query: string) => void;

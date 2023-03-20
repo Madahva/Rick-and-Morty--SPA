@@ -23,3 +23,10 @@ export interface Character {
   image: string;
   episode: string[];
 }
+
+export interface FilterNames {
+  gender: string[];
+  status: string[];
+  species: string[];
+  type: string[];
+}

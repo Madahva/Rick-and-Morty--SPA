@@ -67,7 +67,7 @@ export const fetchFilterNames = createAsyncThunk(
 export const fetchFilteredCharacters = createAsyncThunk(
   "filter/fetchFilteredCharacters",
   async (filters: string) => {
-    const newUrl: string = `${filterURL}/?${filters}`
+    const newUrl: string = `${filterURL}/?${filters}`;
     const response = await fetch(newUrl);
     return (await response.json()) as Response;
   }
@@ -76,7 +76,17 @@ export const fetchFilteredCharacters = createAsyncThunk(
 const homeSlice = createSlice({
   name: "home",
   initialState,
-  reducers: {},
+  reducers: {
+    clearFilteredCharacters: (state) => {
+      state.filteredCharacters = [];
+      state.pagination = {
+        count: 0,
+        pages: 0,
+        next: "",
+        prev: "",
+      };
+    },
+  },
   extraReducers: (builder) => {
     const commonPendingAction = (state: any) => {
       state.status = "loading";
@@ -99,19 +109,30 @@ const homeSlice = createSlice({
 
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
-        state.pagination = action.payload.info;
         state.characters = action.payload.results;
       })
       .addCase(fetchFilterNames.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
         state.filterNames = action.payload;
       })
+
       .addCase(fetchFilteredCharacters.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
-        state.filteredCharacters = action.payload.results;
+        state.pagination = action.payload.info;
+
+        action.payload.results &&
+          action.payload.results.forEach((character) => {
+            if (!characterExists(state.filteredCharacters, character)) {
+              state.filteredCharacters.push(character);
+            }
+          });
       });
   },
 });
+
+function characterExists(array: any, character: any) {
+  return array.some((c: any) => c.id === character.id);
+}
 
 export const selectPagination = (state: RootState) =>
   state.homeReducer.pagination;
@@ -121,4 +142,5 @@ export const selectFilterNames = (state: RootState) =>
   state.homeReducer.filterNames;
 export const selectFilteredCharacters = (state: RootState) =>
   state.homeReducer.filteredCharacters;
+export const { clearFilteredCharacters } = homeSlice.actions;
 export default homeSlice.reducer;

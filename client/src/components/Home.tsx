@@ -11,9 +11,8 @@ export function Home(): ReactElement {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCharacters());
     dispatch(fetchFilterNames());
-  }, [dispatch]);
+  }, []);
 
   return (
     <main className={css.home}>

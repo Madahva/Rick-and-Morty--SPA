@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   fetchFilteredCharacters,
   selectFilterNames,
+  clearFilteredCharacters,
 } from "../redux/features/homeSlice";
 import { FilterNames } from "../type";
 
@@ -19,6 +20,7 @@ export function Filters(): ReactElement {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
+    dispatch(clearFilteredCharacters());
     dispatch(fetchFilteredCharacters(generateQueryString(selectedFilter)));
   }, [dispatch, selectedFilter]);
 

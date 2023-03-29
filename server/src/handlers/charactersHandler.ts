@@ -81,6 +81,19 @@ export function getCharactersByNameHandler(req: Request, res: ExpressResponse) {
     });
 }
 
+export function getCharactersByIdHandler(req: Request, res: ExpressResponse) {
+  const { id } = req.params;
+  fetch(`${apiURL}/${id}`)
+    .then((response: FetchResponse) => response.json() as Promise<Character>)
+    .then((data: Character) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("An error occurred 😕");
+    });
+}
+
 export function getFilteredCharactersHandler(
   req: Request,
   res: ExpressResponse

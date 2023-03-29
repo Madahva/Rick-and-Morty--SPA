@@ -64,6 +64,15 @@ export const fetchFilterNames = createAsyncThunk(
   }
 );
 
+export const fetchCharacterDetails = createAsyncThunk(
+  "character/fetchDetails",
+  async (id: string) => {
+    const newUrl: string = `${charactersURL}/${id}`;
+    const response = await fetch(newUrl);
+    return (await response.json()) as Character;
+  }
+);
+
 export const fetchFilteredCharacters = createAsyncThunk(
   "filter/fetchFilteredCharacters",
   async (filters: string) => {
@@ -87,6 +96,7 @@ const homeSlice = createSlice({
       };
     },
   },
+
   extraReducers: (builder) => {
     const commonPendingAction = (state: any) => {
       state.status = "loading";
@@ -103,9 +113,11 @@ const homeSlice = createSlice({
       .addCase(fetchCharacters.pending, commonPendingAction)
       .addCase(fetchFilterNames.pending, commonPendingAction)
       .addCase(fetchFilteredCharacters.pending, commonPendingAction)
+      .addCase(fetchCharacterDetails.pending, commonPendingAction)
       .addCase(fetchCharacters.rejected, commonRejectedAction)
       .addCase(fetchFilterNames.rejected, commonRejectedAction)
       .addCase(fetchFilteredCharacters.rejected, commonRejectedAction)
+      .addCase(fetchCharacterDetails.rejected, commonRejectedAction)
 
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
@@ -114,6 +126,11 @@ const homeSlice = createSlice({
       .addCase(fetchFilterNames.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
         state.filterNames = action.payload;
+      })
+
+      .addCase(fetchCharacterDetails.fulfilled, (state, action) => {
+        commonFulfilledAction(state, action);
+        state.characterDetails = action.payload;
       })
 
       .addCase(fetchFilteredCharacters.fulfilled, (state, action) => {
@@ -142,5 +159,7 @@ export const selectFilterNames = (state: RootState) =>
   state.homeReducer.filterNames;
 export const selectFilteredCharacters = (state: RootState) =>
   state.homeReducer.filteredCharacters;
+export const selectCharacterDetails = (state: RootState) =>
+  state.homeReducer.characterDetails;
 export const { clearFilteredCharacters } = homeSlice.actions;
 export default homeSlice.reducer;

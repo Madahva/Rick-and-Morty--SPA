@@ -6,7 +6,7 @@ export function Card(props: any): ReactElement {
   return (
     <div tabIndex={1} className={css.card} onKeyPress={props.onClose}>
       <div className={css["card__header"]}>
-        <Link to={`/detail/${props.id}`}>
+        <Link to={`/details/${props.id}`}>
           <h3>{props.name}</h3>
         </Link>
       </div>

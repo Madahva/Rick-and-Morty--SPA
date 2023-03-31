@@ -2,11 +2,7 @@ import { ReactElement, useState } from "react";
 import css from "../assets/styles/SearchBar.module.css";
 import search__icon from "../assets/images/search__icon.svg";
 
-interface Props {
-  onSearch: (query: string) => void;
-}
-
-export function SearchBar(props: Props): ReactElement {
+export function SearchBar(): ReactElement {
   const [character, setCharacter] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

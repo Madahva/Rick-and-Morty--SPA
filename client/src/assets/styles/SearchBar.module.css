@@ -3,21 +3,26 @@
   border: none;
   caret-color: var(--purple);
   color: var(--purple);
-  width: 80%;
+  width: 100%;
   outline: none;
-  order: 2;
 }
 
-.searchBar input:focus ~ .button-search{
-  transform: scale(1.1) ;
-  transition: all ease-in-out .2s;
+.searchBar input:focus ~ .button-search {
+  transform: scale(1.1);
+  transition: all ease-in-out 0.2s;
 }
 
 .searchBar form {
   align-items: center;
   background-color: #e7e7e6;
   box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.25);
-  border-image: linear-gradient( 1turn, rgba(116, 9, 121, 1), rgba(185, 8, 246, 1), rgba(91, 28, 230, 1) ) 1 / 3px;
+  border-image: linear-gradient(
+      1turn,
+      rgba(116, 9, 121, 1),
+      rgba(185, 8, 246, 1),
+      rgba(91, 28, 230, 1)
+    )
+    1 / 3px;
   border-style: solid;
   box-shadow: 0px 0px 30px 0px RGBA(154, 53, 239, 0.5);
   box-sizing: border-box;
@@ -26,12 +31,12 @@
   justify-content: flex-start;
   padding: 0.5rem 1rem;
   position: relative;
-  transition: all ease-in-out .5s;
-  margin: 0;
+  transition: all ease-in-out 0.5s;
+  margin: 0 auto;
 }
 
 .searchBar form:hover {
-  box-shadow: 0px 0px 30px 0px RGBA(154, 53, 239, .8);
+  box-shadow: 0px 0px 30px 0px RGBA(154, 53, 239, 0.8);
 }
 
 .searchBar button {
@@ -45,45 +50,13 @@ button img {
   cursor: pointer;
 }
 
-.button-random {
-  transform: scale(1.5);
-  order: 3;
-}
-
-.button-random:hover img {
-  animation-name: girar;
-  animation-duration: 3s;
-  animation-fill-mode: solid;
-  animation-iteration-count: infinite;
-}
-
-@keyframes girar {
-  50% {
-    transform: rotate(120deg) scale(1.1);
-  }
-}
-
-.button-random:focus img {
-  transform: rotate(360deg) scale(1.1);
-  transition: all ease-in-out 1.5s;
-}
-
-.button-random:before {
-  position: absolute;
-  content: "";
-  background: var(--purple);
-  height: 100%;
-  width: 2px;
-  left: -5px;
-  top: 0;
-}
-
 @media (min-width: 900px) {
   .searchBar form {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-right: 10rem;
-    width: 20rem;
+    width: 15rem;
   }
 }
+
+

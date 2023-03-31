@@ -19,7 +19,6 @@ export function Details(): ReactElement {
     dispatch(fetchCharacterDetails(id));
   }, [dispatch]);
 
-  console.log(character);
   return (
     <div className={css.detail}>
       <div className={css.character}>

@@ -22,7 +22,7 @@
   width: 160px;
   min-width: 160px;
   position: relative;
-  z-index: 99999;
+  z-index: 9999;
 }
 
 .card:hover {

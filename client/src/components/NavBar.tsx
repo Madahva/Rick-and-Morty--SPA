@@ -1,7 +1,8 @@
 import type { ReactElement } from "react";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import css from "../assets/styles/NavBar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import headerLogo from "../assets/images/logo.png";
 import { SearchBar } from "./SearchBar";
 import {
@@ -9,12 +10,14 @@ import {
   faHeart,
   faBars,
   faXmark,
+  faPerson,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function NavBar(): ReactElement {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
   const goToHome = () => {
     navigate("/");
@@ -23,6 +26,10 @@ export function NavBar(): ReactElement {
   const handleModalClick = () => {
     setShowModal(!showModal);
   };
+
+  const handleGoToFavourite = () => {
+    isAuthenticated ? navigate("/favourite") : alert("HEY! Watch out!");
+  }
 
   return (
     <div className={css.header}>
@@ -42,10 +49,7 @@ export function NavBar(): ReactElement {
             <img src={headerLogo} alt="Logo" onClick={goToHome} />
           </div>
 
-          <button
-            className={css.modal__button}
-            onClick={handleModalClick}
-          >
+          <button className={css.modal__button} onClick={handleModalClick}>
             <FontAwesomeIcon
               icon={faXmark}
               size="2xl"
@@ -54,15 +58,26 @@ export function NavBar(): ReactElement {
           </button>
         </div>
 
-        <Link to="/favourites" className={css.link}>
+        <a className={css.link} onClick={handleGoToFavourite}>
           Favourites <FontAwesomeIcon icon={faHeart} />
-        </Link>
-
-        <a className={css.link}>
-          <strong>Login </strong>
-          <FontAwesomeIcon icon={faRightToBracket} />
         </a>
 
+        {!isAuthenticated ? (
+          <a className={css.link} onClick={() => loginWithRedirect()}>
+            <strong>Log in </strong>
+            <FontAwesomeIcon icon={faRightToBracket} />
+          </a>
+        ) : (
+          <a
+            className={css.link}
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            <strong>Log out </strong>
+            <FontAwesomeIcon icon={faPerson} />
+          </a>
+        )}
         <SearchBar />
       </div>
 

@@ -21,7 +21,6 @@
   height: min-content;
   width: 160px;
   min-width: 160px;
-  position: relative;
   z-index: 9999;
 }
 
@@ -70,7 +69,11 @@
   justify-content: space-between;
 }
 
-.card button {
+.card__button {
+  position: relative;
+}
+
+.button__fav {
   background-color: transparent;
   border-radius: 100%;
   border: none;
@@ -78,14 +81,46 @@
   height: 50px;
   opacity: 0;
   position: absolute;
-  right: 4rem;
+  right: 3.9rem;
+  top: 1rem;
+  width: 50px;
+}
+
+.button__view {
+  background-color: transparent;
+  border-radius: 100%;
+  border: none;
+  color: #bf616a;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+  right: 3.9rem;
   top: 6rem;
   width: 50px;
 }
 
 .card button:hover {
-  transition: all ease-in 0.5s;
-  transform: scale(1.1);
+  transition: all ease-in 0.3s;
+  transform: scale(1.2);
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 60px;
+  background-color: var(--green);
+  color: var(--blue);
+  text-align: center;
+  font-size: 11px;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  top:1rem;
+  right: 4rem;
+  z-index: 1;
+}
+
+button:hover .tooltip {
+  visibility: visible;
 }
 
 @keyframes moveTittle {
@@ -158,6 +193,9 @@ a::before {
   width: 50px;
   height: 50px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   border-radius: 100%;
   border: none;

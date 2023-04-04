@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export function NavBar(): ReactElement {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const goToHome = () => {
     navigate("/");
@@ -28,7 +28,7 @@ export function NavBar(): ReactElement {
   };
 
   const handleGoToFavourite = () => {
-    isAuthenticated ? navigate("/favourite") : alert("HEY! Watch out!");
+    isAuthenticated ? navigate("/favourites") : alert("HEY! Watch out!");
   }
 
   return (

@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import homeReducer from "./features/homeSlice";
+import favouriteReducer from "./features/favouriteSlice";
 
 export const store = configureStore({
   reducer: {
     homeReducer,
+    favouriteReducer,
   },
 });
 

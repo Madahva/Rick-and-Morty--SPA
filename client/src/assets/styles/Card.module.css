@@ -86,7 +86,7 @@
   width: 50px;
 }
 
-.button__view {
+.button__view, .button__close {
   background-color: transparent;
   border-radius: 100%;
   border: none;

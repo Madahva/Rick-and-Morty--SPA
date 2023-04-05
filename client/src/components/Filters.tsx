@@ -6,11 +6,14 @@ import {
   fetchFilteredCharacters,
   selectFilterNames,
   clearFilteredCharacters,
+  selectSearch,
 } from "../redux/features/homeSlice";
 import { FilterNames } from "../type";
 
 export function Filters(): ReactElement {
   const filterNames: FilterNames = useAppSelector(selectFilterNames);
+  const search: string = useAppSelector(selectSearch);
+  //El State tiene que ser reemplazado por un objeto traido del stado global
   const [selectedFilter, setSelectedFilter] = useState({
     gender: "",
     status: "",
@@ -38,7 +41,7 @@ export function Filters(): ReactElement {
         queryString += `${filterName}=${filterObject[filterName]}&`;
       }
     }
-    return queryString.slice(0, -1);
+    return `${queryString}name=${search}`;
   }
 
   const handleFilterReset = () => {
@@ -48,6 +51,12 @@ export function Filters(): ReactElement {
       species: "",
       type: "",
     });
+
+    const selectElements = document.getElementsByTagName("select");
+    for (let i = 0; i < selectElements.length; i++) {
+      const options = selectElements[i].options;
+      selectElements[i].selectedIndex = options.length - 1;
+    }
   };
 
   return (
@@ -70,7 +79,7 @@ export function Filters(): ReactElement {
                     </option>
                   );
                 })}
-              <option value=""> -- All -- </option>
+              <option value=""> -- {filterName} -- </option>
             </select>
           );
         })}

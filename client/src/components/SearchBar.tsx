@@ -1,8 +1,11 @@
 import { ReactElement, useState } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { searchByName } from "../redux/features/homeSlice";
 import css from "../assets/styles/SearchBar.module.css";
 import search__icon from "../assets/images/search__icon.svg";
 
 export function SearchBar(): ReactElement {
+  const dispactch = useAppDispatch();
   const [character, setCharacter] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +13,14 @@ export function SearchBar(): ReactElement {
   };
 
   const handleClick = () => {
-    console.log(character) 
+    dispactch(searchByName(character));
+
+    //todo:Borrar filtro
+    const selectElements = document.getElementsByTagName("select");
+    for (let i = 0; i < selectElements.length; i++) {
+      const options = selectElements[i].options;
+      selectElements[i].selectedIndex = options.length - 1;
+    }
   };
 
   return (

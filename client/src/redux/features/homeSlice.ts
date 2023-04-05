@@ -5,6 +5,8 @@ import { Response, Pagination, Character, FilterNames } from "../../type";
 const charactersURL: string = "http://localhost:4000/characters";
 const filterNames: string = "http://localhost:4000/characters/filtersName";
 const filterURL: string = "http://localhost:4000/characters/filter";
+const searchByNameURL: string =
+  "http://localhost:4000/characters/filter/?name=";
 
 interface HomeState {
   pagination: Pagination;
@@ -12,6 +14,7 @@ interface HomeState {
   characterDetails: Character;
   filterNames: FilterNames;
   filteredCharacters: Character[];
+  search: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | undefined;
 }
@@ -44,6 +47,7 @@ const initialState: HomeState = {
     type: [],
   },
   filteredCharacters: [],
+  search: "",
   status: "idle",
   error: undefined,
 };
@@ -82,6 +86,19 @@ export const fetchFilteredCharacters = createAsyncThunk(
   }
 );
 
+export const searchByName = createAsyncThunk(
+  "filter/searchByName",
+  async (name: string) => {
+    const newUrl = `${searchByNameURL}${name}`;
+    const response = await fetch(newUrl);
+    const result = (await response.json()) as Response;
+    return {
+      result,
+      search: name,
+    };
+  }
+);
+
 const homeSlice = createSlice({
   name: "home",
   initialState,
@@ -114,10 +131,13 @@ const homeSlice = createSlice({
       .addCase(fetchFilterNames.pending, commonPendingAction)
       .addCase(fetchFilteredCharacters.pending, commonPendingAction)
       .addCase(fetchCharacterDetails.pending, commonPendingAction)
+      .addCase(searchByName.pending, commonPendingAction)
+
       .addCase(fetchCharacters.rejected, commonRejectedAction)
       .addCase(fetchFilterNames.rejected, commonRejectedAction)
       .addCase(fetchFilteredCharacters.rejected, commonRejectedAction)
       .addCase(fetchCharacterDetails.rejected, commonRejectedAction)
+      .addCase(searchByName.rejected, commonRejectedAction)
 
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
@@ -131,6 +151,13 @@ const homeSlice = createSlice({
       .addCase(fetchCharacterDetails.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
         state.characterDetails = action.payload;
+      })
+
+      .addCase(searchByName.fulfilled, (state, action) => {
+        commonFulfilledAction(state, action);
+        state.search = action.payload.search;
+        state.pagination = action.payload.result.info;
+        state.filteredCharacters = action.payload.result.results;
       })
 
       .addCase(fetchFilteredCharacters.fulfilled, (state, action) => {
@@ -161,5 +188,6 @@ export const selectFilteredCharacters = (state: RootState) =>
   state.homeReducer.filteredCharacters;
 export const selectCharacterDetails = (state: RootState) =>
   state.homeReducer.characterDetails;
+export const selectSearch = (state: RootState) => state.homeReducer.search;
 export const { clearFilteredCharacters } = homeSlice.actions;
 export default homeSlice.reducer;

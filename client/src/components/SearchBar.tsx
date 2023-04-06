@@ -14,13 +14,6 @@ export function SearchBar(): ReactElement {
 
   const handleClick = () => {
     dispactch(searchByName(character));
-
-    //todo:Borrar filtro
-    const selectElements = document.getElementsByTagName("select");
-    for (let i = 0; i < selectElements.length; i++) {
-      const options = selectElements[i].options;
-      selectElements[i].selectedIndex = options.length - 1;
-    }
   };
 
   return (

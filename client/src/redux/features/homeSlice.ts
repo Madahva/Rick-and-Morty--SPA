@@ -112,6 +112,21 @@ const homeSlice = createSlice({
         prev: "",
       };
     },
+    clearDetails: (state) => {
+      state.characterDetails = {
+        user: "",
+        id: -1,
+        name: "",
+        status: "",
+        species: "",
+        type: "",
+        gender: "",
+        origin: "",
+        location: "",
+        image: "",
+        episode: [],
+      };
+    },
   },
 
   extraReducers: (builder) => {
@@ -189,5 +204,5 @@ export const selectFilteredCharacters = (state: RootState) =>
 export const selectCharacterDetails = (state: RootState) =>
   state.homeReducer.characterDetails;
 export const selectSearch = (state: RootState) => state.homeReducer.search;
-export const { clearFilteredCharacters } = homeSlice.actions;
+export const { clearFilteredCharacters, clearDetails } = homeSlice.actions;
 export default homeSlice.reducer;

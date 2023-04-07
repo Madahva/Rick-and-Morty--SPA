@@ -9,6 +9,7 @@ import {
 import { Character } from "../type";
 import css from "../assets/styles/Details.module.css";
 import css2 from "../assets/styles/CardsContainer.module.css";
+import Loading from "./Loading";
 
 export function Details(): ReactElement {
   const { id } = useParams();
@@ -19,21 +20,25 @@ export function Details(): ReactElement {
     dispatch(fetchCharacterDetails(id));
   }, [dispatch]);
 
+  console.log(character.image)
   return (
     <div className={css.detail}>
-      <div className={css.character}>
-        <img src={character.image} alt={character.name} />
-        <div className={css["character__info"]}>
-          <h1>{character.name}</h1>
-          <p>Status: {character.status}</p>
-          <p>Species: {character.species}</p>
-          {character.type && <p>Type: {character.type}</p>}
-          <p>Gender: {character.gender}</p>
-          <p>Origin: {character.origin.name}</p>
-          <p>Location: {character.location.name}</p>
+      {!character.image ? (
+        <Loading />
+      ) : (
+        <div className={css.character}>
+          <img src={character.image} alt={character.name} />
+          <div className={css["character__info"]}>
+            <h1>{character.name}</h1>
+            <p>Status: {character.status}</p>
+            <p>Species: {character.species}</p>
+            {character.type && <p>Type: {character.type}</p>}
+            <p>Gender: {character.gender}</p>
+            <p>Origin: {character.origin.name}</p>
+            <p>Location: {character.location.name}</p>
+          </div>
         </div>
-      </div>
-
+      )}
       <div>
         <div className={`${css2.wave} ${css2.wave1}`}></div>
         <div className={`${css2.wave} ${css2.wave2}`}></div>

@@ -11,6 +11,8 @@ import jerryImg from "../assets/images/jerry.gif";
 import { Card } from "./Card";
 import { selectFilteredCharacters } from "../redux/features/homeSlice";
 import { Character } from "../type";
+import Loading from "./Loading";
+
 export function CardsContainer(): ReactElement {
   const dispatch = useAppDispatch();
   const { user } = useAuth0();
@@ -30,8 +32,8 @@ export function CardsContainer(): ReactElement {
       <div className={css.jerryContainer}>
         <img className={css.jerry} src={jerryImg} alt="Jerry" />
       </div>
-
-      {characters &&
+      {characters.length ? (
+        characters &&
         characters.map((character, index) => (
           <Card
             gender={character.gender}
@@ -43,8 +45,10 @@ export function CardsContainer(): ReactElement {
             all={character}
             favouriteIds={favouriteIds}
           />
-        ))}
-
+        ))
+      ) : (
+        <Loading />
+      )}
       <div>
         <div className={`${css.wave} ${css.wave1}`}></div>
         <div className={`${css.wave} ${css.wave2}`}></div>

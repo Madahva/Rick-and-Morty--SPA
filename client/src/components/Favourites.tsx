@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   fetchFavourites,
@@ -9,15 +9,18 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import { Card } from "./Card";
 import css from "../assets/styles/CardsContainer.module.css";
+import Loading from "./Loading";
 
 export function Favourites(): ReactElement {
   const { user } = useAuth0();
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectFavourites);
   const favouriteIds = characters.map((item) => item.id);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     dispatch(fetchFavourites(user?.email));
+    setIsLoading(false)
   }, [dispatch]);
 
   const handleDelete = (id: string) => {
@@ -32,7 +35,8 @@ export function Favourites(): ReactElement {
       style={{ padding: "19rem 10rem 0rem 10rem" }}
     >
       <h1 className={css.tittle}>{user?.given_name}'s Favorite Characters</h1>
-      {characters &&
+      {!isLoading ? (
+        characters &&
         characters.map((character, index) => (
           <Card
             gender={character.gender}
@@ -46,7 +50,10 @@ export function Favourites(): ReactElement {
             showDeleteBtn={true}
             onDelete={handleDelete}
           />
-        ))}
+        ))
+      ) : (
+        <Loading />
+      )}
 
       <div>
         <div className={`${css.wave} ${css.wave1}`}></div>

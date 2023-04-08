@@ -1,3 +1,35 @@
-.filters__select {
+.filters {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
   margin-top: 12rem;
+  width: 100%;
+}
+
+.filters__select {
+  background-color: var(--blue);
+  border: 1px solid var(--purple);
+  border-left: none;
+  border-right: none;
+  color: var(--green);
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.filters__select:hover {
+  background-color: black;
+  transition: all ease-out 0.3s;
+}
+
+.filters button {
+  color: var(--purple);
+}
+
+@media (min-width: 1100px) {
+  .filters {
+    flex-direction: row;
+  }
 }

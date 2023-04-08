@@ -82,11 +82,11 @@ export function Filters(): ReactElement {
                     </option>
                   );
                 })}
-              <option value=""> -- {filterName} -- </option>
+              <option value="">{filterName}</option>
             </select>
           );
         })}
-      <button onClick={handleFilterReset}>Reset</button>
+      <button className={css.filters__select} onClick={handleFilterReset}>Clean 🔮</button>
     </section>
   );
 }

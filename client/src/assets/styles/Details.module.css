@@ -2,7 +2,7 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  padding: 12rem;
+  padding: 12rem 0;
   color: var(--green);
 }
 
@@ -38,22 +38,26 @@
 }
 
 .character h1 {
-  margin-bottom: 1.9rem;
+  margin: 1.9rem 0;
 }
 
 .character p {
-  font-size: 1rem;
+  font-size: .9rem;
+}
+
+.character p:last-child {
+  margin-bottom: 1.9rem;
 }
 
 @media (min-width: 950px) {
   .character {
-    width: 52rem;
+    width: 45rem;
     flex-direction: row;
   }
   .character__info {
     text-align: start;
   }
   .detail img {
-    width: 18.5rem;
+    width: 17rem;
   }
 }

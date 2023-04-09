@@ -1,6 +1,7 @@
 export interface Response {
   info: Pagination;
   results: Character[];
+  error: string;
 }
 
 export interface Pagination {

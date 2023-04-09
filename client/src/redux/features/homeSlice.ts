@@ -15,6 +15,7 @@ interface HomeState {
   filterNames: FilterNames;
   filteredCharacters: Character[];
   search: string;
+  notFound: boolean;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | undefined;
 }
@@ -48,6 +49,7 @@ const initialState: HomeState = {
   },
   filteredCharacters: [],
   search: "",
+  notFound: false,
   status: "idle",
   error: undefined,
 };
@@ -95,6 +97,7 @@ export const searchByName = createAsyncThunk(
     return {
       result,
       search: name,
+      error: result?.error,
     };
   }
 );
@@ -126,6 +129,9 @@ const homeSlice = createSlice({
         image: "",
         episode: [],
       };
+    },
+    clearSearch: (state) => {
+      state.search = "";
     },
   },
 
@@ -178,6 +184,12 @@ const homeSlice = createSlice({
       .addCase(fetchFilteredCharacters.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
         state.pagination = action.payload.info;
+        
+        if (action.payload?.error === "There is nothing here") {
+          state.notFound = true;
+        } else {
+          state.notFound = false;
+        }
 
         action.payload.results &&
           action.payload.results.forEach((character) => {
@@ -204,5 +216,6 @@ export const selectFilteredCharacters = (state: RootState) =>
 export const selectCharacterDetails = (state: RootState) =>
   state.homeReducer.characterDetails;
 export const selectSearch = (state: RootState) => state.homeReducer.search;
-export const { clearFilteredCharacters, clearDetails } = homeSlice.actions;
+export const selectNotFound = (state: RootState) => state.homeReducer.notFound;
+export const { clearFilteredCharacters, clearDetails, clearSearch } = homeSlice.actions;
 export default homeSlice.reducer;

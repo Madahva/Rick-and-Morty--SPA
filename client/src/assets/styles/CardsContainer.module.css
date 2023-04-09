@@ -15,7 +15,22 @@
   gap: 3rem;
   justify-content: center;
   margin-bottom: 3rem;
-  padding: 6rem 10rem 0rem 10rem;
+  padding: 0rem 2rem;
+}
+
+.notFound {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.notFound p {
+  color: var(--purple);
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .jerryContainer {
@@ -108,5 +123,8 @@
 @media (min-width: 950px) {
   .tittle {
     font-size: 2rem;
+  }
+  .cards {
+    padding: 0 10rem;
   }
 }

@@ -14,6 +14,7 @@ export function SearchBar(): ReactElement {
 
   const handleClick = () => {
     dispactch(searchByName(character));
+    setCharacter("");
   };
 
   return (

@@ -9,12 +9,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import css from "../assets/styles/CardsContainer.module.css";
 import jerryImg from "../assets/images/jerry.gif";
 import { Card } from "./Card";
-import { selectFilteredCharacters } from "../redux/features/homeSlice";
+import {
+  selectFilteredCharacters,
+  selectNotFound,
+} from "../redux/features/homeSlice";
 import { Character } from "../type";
 import Loading from "./Loading";
 
 export function CardsContainer(): ReactElement {
   const dispatch = useAppDispatch();
+  const notFound = useAppSelector(selectNotFound);
   const { user } = useAuth0();
   const characters: Character[] = useAppSelector(selectFilteredCharacters);
   const favourite = useAppSelector(selectFavourites);
@@ -32,8 +36,7 @@ export function CardsContainer(): ReactElement {
       <div className={css.jerryContainer}>
         <img className={css.jerry} src={jerryImg} alt="Jerry" />
       </div>
-      {characters.length ? (
-        characters &&
+      {characters && characters.length ? (
         characters.map((character, index) => (
           <Card
             gender={character.gender}
@@ -46,6 +49,11 @@ export function CardsContainer(): ReactElement {
             favouriteIds={favouriteIds}
           />
         ))
+      ) : notFound ? (
+        <div className={css.notFound}>
+          <p>There is nothing here</p>
+          <p>🤭</p>
+        </div>
       ) : (
         <Loading />
       )}

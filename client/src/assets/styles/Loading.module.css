@@ -5,8 +5,9 @@
   height: 100vh;
   width: 100vw;
   position: absolute;
-  top: 5rem;
+  top: 15rem;
   left: 0;
+  z-index: -9;
 }
 
 .three-body {
@@ -111,3 +112,10 @@
     opacity: 0.8;
   }
 }
+
+@media (min-width: 1100px ) {
+  .loading {
+    top: 6rem;
+  }  
+}
+

@@ -28,7 +28,7 @@ export function NavBar(): ReactElement {
   };
 
   const handleGoToFavourite = () => {
-    isAuthenticated ? navigate("/favourites") : alert("HEY! Watch out!");
+    isAuthenticated ? navigate("/favourites") : alert("HEY! You must been loged!");
   }
 
   return (

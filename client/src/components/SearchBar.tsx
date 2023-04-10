@@ -1,11 +1,11 @@
 import { ReactElement, useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
-import { searchByName } from "../redux/features/homeSlice";
+import { searchByName, setFilters } from "../redux/features/homeSlice";
 import css from "../assets/styles/SearchBar.module.css";
 import search__icon from "../assets/images/search__icon.svg";
 
 export function SearchBar(): ReactElement {
-  const dispactch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [character, setCharacter] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,8 +13,16 @@ export function SearchBar(): ReactElement {
   };
 
   const handleClick = () => {
-    dispactch(searchByName(character));
+    dispatch(searchByName(character));
     setCharacter("");
+    dispatch(
+      setFilters({
+        gender: "",
+        status: "",
+        species: "",
+        type: "",
+      })
+    );
   };
 
   return (

@@ -7,6 +7,7 @@ import {
   clearDetails,
   selectSearch,
   clearSearch,
+  setFilters,
 } from "../redux/features/homeSlice";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,14 @@ export function Home(): ReactElement {
 
   const handleClearSearch = () => {
     dispatch(clearSearch());
+    dispatch(
+      setFilters({
+        gender: "",
+        status: "",
+        species: "",
+        type: "",
+      })
+    );
   };
 
   return (

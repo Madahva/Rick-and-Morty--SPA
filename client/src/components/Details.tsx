@@ -20,7 +20,6 @@ export function Details(): ReactElement {
     dispatch(fetchCharacterDetails(id));
   }, [dispatch]);
 
-  console.log(character.image)
   return (
     <div className={css.detail}>
       {!character.image ? (

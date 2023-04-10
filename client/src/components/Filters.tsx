@@ -7,30 +7,29 @@ import {
   selectFilterNames,
   clearFilteredCharacters,
   selectSearch,
+  selectFilters,
+  setFilters,
 } from "../redux/features/homeSlice";
 import { FilterNames } from "../type";
 
 export function Filters(): ReactElement {
   const filterNames: FilterNames = useAppSelector(selectFilterNames);
   const search: string = useAppSelector(selectSearch);
-  const [selectedFilter, setSelectedFilter] = useState({
-    gender: "",
-    status: "",
-    species: "",
-    type: "",
-  });
+  const filters = useAppSelector(selectFilters);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(clearFilteredCharacters());
-    dispatch(fetchFilteredCharacters(generateQueryString(selectedFilter)));
-  }, [dispatch, selectedFilter]);
+    dispatch(fetchFilteredCharacters(generateQueryString(filters)));
+  }, [dispatch, filters]);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedFilter({
-      ...selectedFilter,
-      [event.target.name]: event.target.value,
-    });
+    dispatch(
+      setFilters({
+        ...filters,
+        [event.target.name]: event.target.value,
+      })
+    );
   };
 
   function generateQueryString(filterObject: any): string {
@@ -44,12 +43,14 @@ export function Filters(): ReactElement {
   }
 
   const handleFilterReset = () => {
-    setSelectedFilter({
-      gender: "",
-      status: "",
-      species: "",
-      type: "",
-    });
+    dispatch(
+      setFilters({
+        gender: "",
+        status: "",
+        species: "",
+        type: "",
+      })
+    );
 
     const selectElements = document.getElementsByTagName("select");
     for (let i = 0; i < selectElements.length; i++) {
@@ -57,10 +58,6 @@ export function Filters(): ReactElement {
       selectElements[i].selectedIndex = options.length - 1;
     }
   };
-
-  useEffect(() => {
-    handleFilterReset();
-  }, [search]);
 
   return (
     <section className={css.filters}>
@@ -72,6 +69,7 @@ export function Filters(): ReactElement {
               name={filterName}
               key={index}
               className={css.filters__select}
+              value={filters[filterName as keyof typeof filters]}
             >
               {filterNames[filterName as keyof FilterNames]
                 .filter((filterOption: string) => filterOption !== "")
@@ -86,7 +84,9 @@ export function Filters(): ReactElement {
             </select>
           );
         })}
-      <button className={css.filters__select} onClick={handleFilterReset}>Clean 🔮</button>
+      <button className={css.filters__select} onClick={handleFilterReset}>
+        Clean 🔮
+      </button>
     </section>
   );
 }

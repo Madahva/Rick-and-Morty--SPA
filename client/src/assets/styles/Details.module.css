@@ -58,6 +58,6 @@
     text-align: start;
   }
   .detail img {
-    width: 17rem;
+    aspect-ratio: auto;
   }
 }

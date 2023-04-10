@@ -14,6 +14,7 @@ interface HomeState {
   characterDetails: Character;
   filterNames: FilterNames;
   filteredCharacters: Character[];
+  filters: {};
   search: string;
   notFound: boolean;
   status: "idle" | "loading" | "succeeded" | "failed";
@@ -46,6 +47,12 @@ const initialState: HomeState = {
     status: [],
     species: [],
     type: [],
+  },
+  filters: {
+    gender: "",
+    status: "",
+    species: "",
+    type: "",
   },
   filteredCharacters: [],
   search: "",
@@ -133,6 +140,9 @@ const homeSlice = createSlice({
     clearSearch: (state) => {
       state.search = "";
     },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -184,7 +194,7 @@ const homeSlice = createSlice({
       .addCase(fetchFilteredCharacters.fulfilled, (state, action) => {
         commonFulfilledAction(state, action);
         state.pagination = action.payload.info;
-        
+
         if (action.payload?.error === "There is nothing here") {
           state.notFound = true;
         } else {
@@ -215,7 +225,13 @@ export const selectFilteredCharacters = (state: RootState) =>
   state.homeReducer.filteredCharacters;
 export const selectCharacterDetails = (state: RootState) =>
   state.homeReducer.characterDetails;
+export const selectFilters = (state: RootState) => state.homeReducer.filters;
 export const selectSearch = (state: RootState) => state.homeReducer.search;
 export const selectNotFound = (state: RootState) => state.homeReducer.notFound;
-export const { clearFilteredCharacters, clearDetails, clearSearch } = homeSlice.actions;
+export const {
+  clearFilteredCharacters,
+  clearDetails,
+  clearSearch,
+  setFilters,
+} = homeSlice.actions;
 export default homeSlice.reducer;

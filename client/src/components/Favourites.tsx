@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useNavigate } from "react-router-dom";
 import {
   fetchFavourites,
   selectFavourites,
@@ -12,15 +13,18 @@ import css from "../assets/styles/CardsContainer.module.css";
 import Loading from "./Loading";
 
 export function Favourites(): ReactElement {
-  const { user } = useAuth0();
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth0();
   const dispatch = useAppDispatch();
   const characters = useAppSelector(selectFavourites);
   const favouriteIds = characters.map((item) => item.id);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+
+  if (!isAuthenticated) navigate("/");
 
   useEffect(() => {
     dispatch(fetchFavourites(user?.email));
-    setIsLoading(false)
+    setIsLoading(false);
   }, [dispatch]);
 
   const handleDelete = (id: string) => {

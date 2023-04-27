@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function NavBar(): ReactElement {
+export function NavBar({ visible, toggleModal }: any): ReactElement {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
@@ -28,8 +28,9 @@ export function NavBar(): ReactElement {
   };
 
   const handleGoToFavourite = () => {
-    isAuthenticated ? navigate("/favourites") : alert("HEY! You must been loged!");
-  }
+    isAuthenticated ? navigate("/favourites") : toggleModal();
+    !visible ? setShowModal(!showModal) : null;
+  };
 
   return (
     <div className={css.header}>

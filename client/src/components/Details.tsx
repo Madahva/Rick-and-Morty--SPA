@@ -11,7 +11,7 @@ import css from "../assets/styles/Details.module.css";
 import css2 from "../assets/styles/CardsContainer.module.css";
 import Loading from "./Loading";
 
-export function Details(): ReactElement {
+export function Details({ visible, toggleModal }: any): ReactElement {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const character: Character = useAppSelector(selectCharacterDetails);
@@ -21,7 +21,11 @@ export function Details(): ReactElement {
   }, [dispatch]);
 
   return (
-    <div className={css.detail}>
+    <div
+      className={css.detail}
+      style={{ opacity: !visible ? "1" : ".1" }}
+      onClick={visible ? toggleModal : null}
+    >
       {!character.image ? (
         <Loading />
       ) : (

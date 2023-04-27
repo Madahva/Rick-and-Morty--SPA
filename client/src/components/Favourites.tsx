@@ -10,8 +10,6 @@ import {
 import { useAuth0 } from "@auth0/auth0-react";
 import { Card } from "./Card";
 import css from "../assets/styles/CardsContainer.module.css";
-import Loading from "./Loading";
-
 export function Favourites(): ReactElement {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
@@ -39,25 +37,27 @@ export function Favourites(): ReactElement {
       style={{ padding: "19rem 10rem 0rem 10rem" }}
     >
       <h1 className={css.tittle}>{user?.given_name}'s Favorite Characters</h1>
-      {!isLoading ? (
-        characters &&
-        characters.map((character, index) => (
-          <Card
-            gender={character.gender}
-            id={character.id}
-            image={character.image}
-            key={index}
-            name={character.name}
-            species={character.species}
-            all={character}
-            favouriteIds={favouriteIds}
-            showDeleteBtn={true}
-            onDelete={handleDelete}
-          />
-        ))
-      ) : (
-        <Loading />
-      )}
+     {!isLoading && characters.length > 0 ? (
+      characters.map((character, index) => (
+        <Card
+          gender={character.gender}
+          id={character.id}
+          image={character.image}
+          key={index}
+          name={character.name}
+          species={character.species}
+          all={character}
+          favouriteIds={favouriteIds}
+          showDeleteBtn={true}
+          onDelete={handleDelete}
+        />
+      ))
+    ) : (
+      <div className={css.notFound}>
+        <p>There is nothing here</p>
+        <p>🤭</p>
+      </div>
+    )}
 
       <div>
         <div className={`${css.wave} ${css.wave1}`}></div>

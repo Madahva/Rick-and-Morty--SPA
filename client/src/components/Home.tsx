@@ -15,7 +15,7 @@ import { Filters } from "./Filters";
 import { CardsContainer } from "./CardsContainer";
 import { Pagination } from "./Pagination";
 
-export function Home(): ReactElement {
+export function Home({ visible, toggleModal }: any): ReactElement {
   const dispatch = useAppDispatch();
   const search = useAppSelector(selectSearch);
 
@@ -37,7 +37,12 @@ export function Home(): ReactElement {
   };
 
   return (
-    <main className={css.home}>
+    <main
+      className={css.home}
+      style={{ opacity: !visible ? "1" : ".1",
+      }}
+      onClick={visible ? toggleModal : null}
+    >
       <Filters />
       {search && (
         <div className={css.searchText} onClick={handleClearSearch}>
@@ -49,7 +54,7 @@ export function Home(): ReactElement {
           />
         </div>
       )}
-      <CardsContainer />
+      <CardsContainer visible={visible} toggleModal={toggleModal} />
       <Pagination />
     </main>
   );

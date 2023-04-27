@@ -6,7 +6,6 @@ import { useAppDispatch } from "../redux/hooks";
 import {
   createFavourite,
   fetchFavourites,
-  deleteFavourite,
 } from "../redux/features/favouriteSlice";
 import css from "../assets/styles/Card.module.css";
 import { faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -32,7 +31,7 @@ export function Card(props: any): ReactElement {
       ? (dispatch(createFavourite(createFav(character))),
         setIsFav(true),
         dispatch(fetchFavourites(user?.email)))
-      : alert("Sorry, you must be logged in to do that! 🤭");
+      : props.toggleModal();
   };
 
   const createFav = (character: any) => {
@@ -54,7 +53,12 @@ export function Card(props: any): ReactElement {
   const favourite = props.favouriteIds;
 
   return (
-    <div className={css.card}>
+    <div
+      className={css.card}
+      style={{
+        pointerEvents: props.visible ? "none" : "auto",
+      }}
+    >
       <div className={css["card__header"]}>
         <Link to={`/details/${props.id}`}>
           <h3>{props.name}</h3>

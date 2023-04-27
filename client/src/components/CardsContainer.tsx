@@ -16,7 +16,7 @@ import {
 import { Character } from "../type";
 import Loading from "./Loading";
 
-export function CardsContainer(): ReactElement {
+export function CardsContainer({visible, toggleModal }: any): ReactElement {
   const dispatch = useAppDispatch();
   const notFound = useAppSelector(selectNotFound);
   const { user } = useAuth0();
@@ -47,6 +47,8 @@ export function CardsContainer(): ReactElement {
             species={character.species}
             all={character}
             favouriteIds={favouriteIds}
+            toggleModal={toggleModal}
+            visible={visible}
           />
         ))
       ) : notFound ? (

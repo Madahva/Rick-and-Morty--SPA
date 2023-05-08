@@ -13,4 +13,5 @@ This is a Full-stack web app, SPA and CRUD with certain features such as: Pagina
 - Node.js
 - Express
 - Sequelize
+
 - PostgreSQL

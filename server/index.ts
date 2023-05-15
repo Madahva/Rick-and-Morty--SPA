@@ -7,7 +7,7 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("base de datos conectada! :D");
-    return sequelize.sync({ force: true, logging: false });
+    return sequelize.sync({ force: false, logging: false });
   })
   .then(() => {
     app.listen(port, function () {

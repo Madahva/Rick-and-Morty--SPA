@@ -2,11 +2,13 @@ import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const sequelize = new Sequelize({
+const deploy: any = process.env.DATABASE_URL;
+
+export const sequelize = new Sequelize(deploy, {
   dialect: "postgres",
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  username: process.env.DB_USER,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  username: process.env.PGUSER,
   models: [__dirname + "/models"],
 });
 
